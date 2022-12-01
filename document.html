@@ -1,0 +1,313 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="stylesheet" href="public/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <!-- content wrapper -->
+    <div class="flex flex-col h-screen shrink-0">
+        <!--  -->
+        <header class="bg-slate-700 p-4 text-lg text-white font-bold shrink-0">
+            <div class="text-center">Voronoi Diagram 期末報告</div>
+            <div class="text-center">資工碩一</div>
+            <div class="text-center">洪浩育M113040047</div>
+        </header>
+        <div class="flex overflow-hidden">
+            <!-- sidebar -->
+            <div class="w-1/5 h-full bg-slate-100 flex flex-col justify-center">
+                <ul class="font-bold text-xl">
+                    <li class="text-center hover:bg-slate-400 hover:cursor-pointer"><a class="block p-10 " href="#software_specification">軟體規格書</a></li>
+                    <li class="text-center hover:bg-slate-400 hover:cursor-pointer"><a class="block p-10" href="#software_detail">軟體說明</a></li>
+                    <li class="text-center hover:bg-slate-400 hover:cursor-pointer"><a class="block p-10" href="#program_design">程式設計</a></li>
+                    <li class="text-center hover:bg-slate-400 hover:cursor-pointer"><a class="block p-10" href="#testing_and_result">軟體測試與實驗結果</a></li>
+                    <li class="text-center hover:bg-slate-400 hover:cursor-pointer"><a class="block p-10" href="#conclude">結論與心得</a></li>
+                    <li class="text-center hover:bg-slate-400 hover:cursor-pointer"><a class="block p-10" href="#appendix">附錄</a></li>
+                </ul>
+            </div>
+            <!-- content page -->
+            <main class="w-4/5 text-lg overflow-y-auto">
+                <!-- 軟體規則書 -->
+                <div class="m-10" id="software_specification">
+                    <div class="text-center m-10">
+                        <div class="font-bold text-slate-700 text-4xl relative inline-block after:bg-slate-500 after:w-full after:h-0.5 after:block">軟體規格書</div>
+                    </div>
+                    <div>
+                        <p class="font-bold text-2xl my-4">輸入資料規格：</p>
+                        <ul class="list-decimal ml-12 my-2">
+                            <li class="my-2">使用滑鼠在畫布上任意點擊，畫布大小為600</li>
+                            <li class="my-2">使用「Load Test Case」，讀取多個測試資料(每個測試資料有多點)</li>
+                            <li class="my-2">輸入格式每組點的開頭先輸入總數，接續則為每個點的x軸及y軸，範例如下:</li>
+                        </ul>
+                        <div class="ml-12 border-2 py-2 px-4 bg-slate-100">
+                            <p>4</p>
+                            <p>103 200</p>
+                            <p>193 64</p>
+                            <p>193 370</p>
+                            <p>283 200</p>
+                            <p>5</p>
+                            <p>124 200</p>
+                            <p>244 260</p>
+                            <p>357 214</p>
+                            <p>457 537</p>
+                            <p>059 345</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="font-bold text-2xl my-4">輸出資料規格：</p>
+                        <ul class="list-decimal ml-12 my-2">
+                            <li class="my-2">點選Sava Voronoi Diagram存取執行結果</li>
+                            <li class="my-2">輸出檔個格式如下:</li>
+                        </ul>
+                        <p class="ml-12 my-2">輸出的座標點：P x y    // 每個點佔一行，兩整數 x, y 為座標。</p>
+                        <p class="ml-12 my-2">線段：E x1 y1 x2 y2      // (x1, y1) 為起點，(x2, y2) 為終點，其中 x1≦x2 或 x1=x2, y1≦y2。</p>
+                        <p class="ml-12 my-2">座標點排列在前半段，線段排列在後半段。座標點以 lexical order順序排列(即先排序第一維座標，若相同，則再排序第二維座標；線段亦以 lexical order順序排列)。  </p>
+                        <div class="ml-12 border-2 py-2 px-4 bg-slate-100">
+                            <p>P 103 200</p>
+                            <p>P 193 64</p>
+                            <p>P 193 370</p>
+                            <p>P 283 200</p>
+                            <p>E 0 34 193 161</p>
+                            <p>E 0 363 193 261</p>
+                            <p>E 193 161 193 261</p>
+                            <p>E 193 161 437 0</p>
+                            <p>E 193 261 600 476</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="font-bold text-2xl my-4">主介面</p>
+                        <img class="object-contain border border-black ml-10" src="public/img/main_page.png">
+                    </div>
+                    <div>
+                        <p class="font-bold text-2xl my-4">功能</p>
+                        <ul class="list-disc ml-12 my-2">
+                            <li>
+                                <P class="font-bold">Run:</P>
+                                <p class="ml-4">透過滑鼠產生點，執行Run即可產生對應的Voronoi Diagram。</p>
+                            </li>
+                            <li>
+                                <P class="font-bold">Prev Step:</P>
+                                <p class="ml-4">透過step by step的方式產生下一步merge的畫面。</p>
+                            </li>
+                            <li>
+                                <P class="font-bold">Next Step:</P>
+                                <p class="ml-4">透過step by step的方式產生前一步merge的畫面。</p>
+                            </li>
+                            <li>
+                                <P class="font-bold">Clear:</P>
+                                <p class="ml-4">將目前畫面及所產生的資料清除。</p>
+                            </li>
+                            <li>
+                                <P class="font-bold">Load Voronoi Diagram:</P>
+                                <p class="ml-4">將產生的Voronoi Diagram匯出(包含線段及點)。</p>
+                            </li>
+                            <li>
+                                <P class="font-bold">Sava Voronoi Diagram:</P>
+                                <p class="ml-4">將產生的Voronoi Diagram匯出(包含線段及點)。</p>
+                            </li>
+                            <li>
+                                <P class="font-bold">Load Test Case:</P>
+                                <p class="ml-4">將多組Test Cases匯入(每組包含多個點)。</p>
+                            </li>
+                            <li>
+                                <P class="font-bold">Run Test Case:</P>
+                                <p class="ml-4 my-2">透過此按鍵依序執行匯入的多組Test Cases。</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-bold text-2xl my-4">軟體測試規劃書</p>
+                        <p class="ml-6 text-xl font-bold my-2">測試資料: </p>
+                        <ul class="list-disc ml-12 my-2">
+                            <li class="my-2">2點: 0次Merge及完成，主要測試程式是否能解base case</li>
+                            <li class="my-2">3 ~ 6點: 1~多次Merge，測隨機點及edge case有(所有點x軸相同、所有點y軸相同、hyperplane與merge前線段的焦點在畫布外、正方形)</li>
+                            <li class="my-2">7點以上，測隨機點並且檢查是否有正常消線</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 軟體說明 -->
+                <div class="m-10" id="software_detail">
+                    <div class="text-center m-10">
+                        <div class="font-bold text-slate-700 text-4xl relative inline-block after:bg-slate-500 after:w-full after:h-0.5 after:block">軟體說明</div>
+                    </div>
+                    <!-- 安裝說明 -->
+                    <div>
+                        <p class="font-bold text-2xl my-4">安裝說明</p>
+                        <p class="ml-6 my-2">下載檔案後，直接在windows的環境執行"vorornoi.exe。"</p>
+                    </div>
+                    <!-- 使用說明 -->
+                    <div>
+                        <p class="font-bold text-2xl my-4">使用說明</p>
+                        <ul class="list-decimal ml-12 my-2">
+                            <li>
+                                <p class="my-2">於畫布中繪製點，並透過Run執行。</p>
+                                <img class="object-contain border border-black my-2" src="public/img/draw_point_run.png">
+                            </li>
+                            <li>
+                                <p class="my-2">匯入test case，並透過Run Test Case依序執行每個Test case。</p>
+                                <img class="object-contain border border-black my-2" src="public/img/test_run.png">
+                            </li>
+                            <li>
+                                <p class="my-2">當畫面上有點時，可以透過Prev Step及Next Step來查看此Voronoi Diagram的merge步驟(藍:left vorornoi;紅:right voronoi;綠:hyperplane;紫:convex hull; 橘:upper/lower tangent)。</p>
+                                <img class="object-contain border border-black my-2" src="public/img/test_run.png">
+                            </li>
+                            <li>
+                                <p class="my-2">當執行完成時可以透過Sava Voronoi Diagram來匯出檔案，未來能夠透過Load Vorornoi Diagram來匯入之前儲存的檔案。</p>
+                                <img class="object-contain border border-black my-2" src="public/img/merge.png">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 程式設計 -->
+                <div class="m-10" id="program_design">
+                    <div class="text-center m-10">
+                        <div class="font-bold text-slate-700 text-4xl relative inline-block after:bg-slate-500 after:w-full after:h-0.5 after:block">程式設計</div>
+                    </div>
+                    <!-- 資料結構 -->
+                    <div>
+                        <p class="font-bold text-2xl my-4">資料結構</p>
+                        <ul class="list-disc ml-12 my-2">
+                            <li>
+                                <p class="font-bold my-2">Point</p>
+                                <div class="border-2 py-2 px-4 bg-slate-100">
+                                    <p>x: float</p>
+                                    <p>y: float</p>
+                                    <p>edges: list[Edge] #用來記錄目前這個交點與哪幾條Edge相連，在消線時使用</p>
+                                </div> 
+                            </li>
+                            <li>
+                                <p class="font-bold my-2">Line</p>
+                                <p class="">以方程式ax+by=c的方式分別記錄xCoefficient, y Coefficient及constant</p>
+                                <div class="border-2 py-2 px-4 bg-slate-100">
+                                    <p># 以方程式ax+by=c的方式做紀錄，用來計算交點</p>
+                                    <p>xCoefficient: float</p>
+                                    <p>yCoefficient: float</p>
+                                    <p>constant: float</p>
+                                </div> 
+                            </li>
+                            <li>
+                                <p class="font-bold my-2">Face</p>
+                                <div class=" border-2 py-2 px-4 bg-slate-100">
+                                    <p># Voronoi Diagram中被線段圍起的點</p>
+                                    <p>point: Point</p>
+                                    <p>edges: list[Edge]   #關聯所有包為此點的線段</p>
+                                </div> 
+                            </li>
+                            <li>
+                                <p class="font-bold my-2">Edge</p>
+                                <div class=" border-2 py-2 px-4 bg-slate-100">
+                                    <p>start: Point</p>
+                                    <p>end: Point</p>
+                                    <p>startInfinity: bool   # 紀錄此線段在途中是否為無限延伸</p>
+                                    <p>endInfinity: bool</p>
+                                    <p>twinEdge: 'Edge'  # 每個線段都有2條，其起點與終點剛好相反</p>
+                                    <p>line: 'Line' # 線段方程式，用來找交點</p>
+                                    <p>face: 'Face' # 線段關聯到其對應的Face</p>
+                                </div> 
+                            </li>
+                            <li>
+                                <p class="font-bold my-2">VoronoiGraph</p>
+                                <div class=" border-2 py-2 px-4 bg-slate-100">
+                                    <p>canvasWidth: int</p>
+                                    <p>canvasHeight: int</p>
+                                    <p>faces: list[Face]  # 紀錄voronoi graph中所有的face</p>
+                                    <p>edges: list[Edge]  # 紀錄voronoi graph中所有的edge。目前尚未使用。</p>
+                                    <p>voronoiPoints: list[Point]  # 紀錄voronoi graph中線段的交點。目前尚未使用。</p>
+                                    <p>convexHull: list[Point]  # 紀錄目前voronoi graph中的convexhull(逆時針)</p>
+                                    <p>mergeRecords: list[MergeRecord] # step by step的執行紀錄</p>
+                                </div> 
+                            </li>
+                        </ul>                       
+                    </div>
+                    <!-- 演算法 -->
+                    <div>
+                        <p class="font-bold text-2xl my-4">演算法</p>
+                        <ul class="list-disc ml-12 my-2">
+                            <li>
+                                <p class="font-bold my-2">Convex hull  O(n)</p>
+                                <div class=" border-2 py-2 px-4 bg-slate-100">
+                                    <p>1. 左邊convext hull最右邊的點設為lPoint、右邊convex hull最左邊的點設為rPoint，以此2點當作基準edge。</p>
+                                    <p>2. 先以lPoint當作基準找rPoint上方的點，以lPoint與此點組成新的線段，比較原本線段與新線段是否為逆時針旋轉，如果是的話以此新線段為基準並繼續往上找直到基準線段與新線斷變成順時針旋轉，代表找到目前右邊最上方的點。</p>
+                                    <p>3. 先以步驟2找到的rPoint當作基準找lPoint上方的點，以rPoint與此點組成新的線段，比較線段與新線段是否為順時針旋轉，如果是的話以此新線段為基準並繼續往上找直到基準線段與新線斷變成逆時針旋轉，代表找到目前左邊最上方的點。</p>
+                                    <p>4. 2、3步驟不能保證一定能找到2邊convex hull的上切線，必須重複2、3步驟直到直到2邊的點都不再變動，才找到上切線。</p>
+                                    <p>4. 下切線與上切線的找法相同。</p>
+                                    <p>5. 將上下切線與原本左convex hull與右convex hull組合成新的convex hull。</p>
+                                </div> 
+                            </li>
+                            <li>
+                                <p class="font-bold my-2">Hyperplane  O(n)(線段最多3n-6，此演算法美找一個切點會將face往下移，所以不會重複尋找線段)</p>
+                                <div class=" border-2 py-2 px-4 bg-slate-100">
+                                    <p>1. 使用convex hull所找到的upper tangent為基準，左邊的點稱為left face，右邊的點稱為right face，以此2點找中垂線。</p>
+                                    <p>2. 此中垂線與包圍left face及right face的線段找交點，找與中垂線第一個相交的線段，此交點為此段bisector的終點及下一段bisector的起點。
+                                    </p>
+                                    <p>3. 如果相交的線段為左半邊的線段，則將left face設為與此線段對面face。如果相交的線段為右半邊的線段，則將right face設為此線段對面的face</p>
+                                    <p>4. 迴圈執行2, 3步驟直到left face和right face為lower tangent的2端點</p>
+                                    <p>5. 將上述相交線段的端點重新設至相交的點，由於線段縮減所以需要將原本與此端點相連的線段刪除(透過順逆時針及線段為屬於左邊還右邊的voronoi來判斷)</p>
+                                    <p>6. 由於步驟5只刪除直接與縮減線段端點相連的線段，因此掃描所有線段判斷其端點如果只有參照到自己這條線段，則代表此線段沒有與其他線段相連，因此刪除(端點無限延伸的端點只會參照的自己這條線段，所以不用刪除)</p>
+                                </div> 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 軟體測試與實驗結果 -->
+                <div class="m-10" id="testing_and_result">
+                    <div class="text-center m-10">
+                        <div class="font-bold text-slate-700 text-4xl relative inline-block after:bg-slate-500 after:w-full after:h-0.5 after:block">軟體測試與實驗結果</div>
+                    </div>
+                    <div>
+                        <p class="font-bold text-2xl my-4">測試環境</p>
+                        <ul class="list-disc ml-12 my-2">
+                            <li class="my-2">作業系統： Windows 10 Pro (Version: 21H1)</li>
+                            <li class="my-2">處理器: 11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz   1.38 GHz</li>
+                            <li class="my-2">RAM: 24.0 GB</li>
+                            <li class="my-2">程式語言: python 3.10.7</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-bold text-2xl my-4">實驗結果</p>
+                        <p class="ml-6 my-2">目前大部分的測資都可以成功，但之前有隨機點過100多點的有進入無窮迴圈，由於當下沒有記錄測資因此目前尚無法重現</p>
+                        <div class="grid grid-cols-3 gap-4 my-2">
+                            <img class="object-contain h-96 w-96 border border-black" src="public/img/3point.png">
+                            <img class="object-contain h-96 w-96 border border-black" src="public/img/4point.png">
+                            <img class="object-contain h-96 w-96 border border-black" src="public/img/5point.png">
+                            <img class="object-contain h-96 w-96 border border-black" src="public/img/20point.png">
+                            <img class="object-contain h-96 w-96 border border-black" src="public/img/50point.png">
+                            <img class="object-contain h-96 w-96 border border-black" src="public/img/100point.png">
+                            <img class="object-contain h-96 w-96 border border-black" src="public/img/150point.png">
+                            <img class="object-contain h-96 w-96 border border-black" src="public/img/200point.png">
+                        </div>
+
+                    </div>
+                </div>
+                <!-- 結論與心得 -->
+                <div class="m-10" id="conclude">
+                    <div class="text-center m-10">
+                        <div class="font-bold text-slate-700 text-4xl relative inline-block after:bg-slate-500 after:w-full after:h-0.5 after:block">結論與心得</div>
+                    </div>
+                    <div>
+                        <p class="indent-8 my-2">資料結構主要是參考教授指定的資料，但在實際實作時有些地方還不知道要如何記錄較為洽當，因此就直接先略過並以其他方式關聯去取得(VoronoiDiagram，edges和voronoiPoints都尚未使用，目前是透過Face去找出其關聯來找出Edge及Edge的端點(線段交點又稱voronoi point)，未來在修改程式時必須將程式實作的部分稍作修改，有效的使用所定義的資料結構以降低不必要的運算。</p>
+                        <p class="indent-8 my-2">在畫hyperplane及刪除不必要線段時會有許多細節需要去做處理，因為目前尚未想到簡潔的時作方法，因此在程式內加入了許多額外的判斷來進行處理，導致程式的可讀性即可修改性較差，這是未來能夠改進的部分。</p>
+                        <p class="indent-8 my-2">最後，此程式雖然大部分的test case都可以成功，但其中還是有失敗的時候，所以可能要針對失敗的case去找出程式內哪裡的邏輯有誤並進行修改。</p>
+                    </div>
+                           
+                </div>
+                <!-- 附錄 -->
+                <div class="m-10" id="appendix">
+                    <div class="text-center m-10">
+                        <div class="font-bold text-slate-700 text-4xl relative inline-block after:bg-slate-500 after:w-full after:h-0.5 after:block">附錄</div>
+                    </div>
+                    <div class="flex justify-around">
+                        <a class="flex-1 text-blue-800 text-center hover:text-blue-500" href="./voronoi.exe" target="_blank">執行檔</a>
+                        <a class="flex-1 text-blue-800 text-center hover:text-blue-500" href="./src/main.py" target="_blank">原始程式碼1</a>
+                        <a class="flex-1 text-blue-800 text-center hover:text-blue-500" href="./src/voronoi.py" target="_blank">原始程式碼2</a>
+                        <a class="flex-1 text-blue-800 text-center hover:text-blue-500 " href="./test/test_case.txt" target="_blank">測資</a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
