@@ -229,12 +229,12 @@
                             <li>
                                 <p class="font-bold my-2">Convex hull  O(n)</p>
                                 <div class=" border-2 py-2 px-4 bg-slate-100">
-                                    <p>1. 左邊convext hull最右邊的點設為lPoint、右邊convex hull最左邊的點設為rPoint，以此2點當作基準edge。</p>
+                                    <p>1. 左邊convex hull最右邊的點設為lPoint、右邊convex hull最左邊的點設為rPoint，以此2點當作基準edge。</p>
                                     <p>2. 先以lPoint當作基準找rPoint上方的點，以lPoint與此點組成新的線段，比較原本線段與新線段是否為逆時針旋轉，如果是的話以此新線段為基準並繼續往上找直到基準線段與新線斷變成順時針旋轉，代表找到目前右邊最上方的點。</p>
                                     <p>3. 先以步驟2找到的rPoint當作基準找lPoint上方的點，以rPoint與此點組成新的線段，比較線段與新線段是否為順時針旋轉，如果是的話以此新線段為基準並繼續往上找直到基準線段與新線斷變成逆時針旋轉，代表找到目前左邊最上方的點。</p>
                                     <p>4. 2、3步驟不能保證一定能找到2邊convex hull的上切線，必須重複2、3步驟直到直到2邊的點都不再變動，才找到上切線。</p>
-                                    <p>4. 下切線與上切線的找法相同。</p>
-                                    <p>5. 將上下切線與原本左convex hull與右convex hull組合成新的convex hull。</p>
+                                    <p>5. 下切線與上切線的找法相同。</p>
+                                    <p>6. 將上下切線與原本左convex hull與右convex hull組合成新的convex hull。</p>
                                 </div> 
                             </li>
                             <li>
