@@ -203,7 +203,7 @@ Algorithm
     >
     > 6. Combine the upper and lower tangents with the original left and right convex hulls to create a new convex hull.
     
-*   Find Hyperplane O(n)(線段最多3n-6，此演算法美找一個切點會將face往下移，所以不會重複尋找線段)
+*   Find Hyperplane O(n)(線段最多3n-6，此演算法每找一個切點會將face往下移，所以不會重複尋找線段)
 
     > 1. Use the upper tangent found from the convex hull as the reference. The points on the left side are referred to as the left face, and the points on the right side are referred to as the right face. Use these two points to find the perpendicular bisector.
     > 
